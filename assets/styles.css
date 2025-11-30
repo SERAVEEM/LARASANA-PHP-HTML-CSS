@@ -1,0 +1,82 @@
+body {
+    margin: 0;
+    background: #000;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 60px;
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+}
+
+.nav-links a {
+    margin: 0 20px;
+    color: white;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.btn-signup {
+    border: 1px solid #B38A1E;
+    padding: 10px 18px;
+    border-radius: 6px;
+    color: #B38A1E;
+    text-decoration: none;
+}
+
+.hero {
+    display: flex;
+    padding: 120px 60px;
+    gap: 40px;
+}
+
+.hero-content {
+    flex: 1;
+}
+
+.hero-content h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.btn-shop {
+    background: #B38A1E;
+    padding: 12px 26px;
+    color: #fff;
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+}
+
+.hero-image {
+    flex: 1;
+    position: relative;
+}
+
+.hero-image img {
+    width: 100%;
+    filter: grayscale(100%);
+}
+
+/* PARTNERS */
+.partners {
+    background: #fff;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.partners img {
+    height: 40px;
+}
