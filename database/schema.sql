@@ -21,7 +21,7 @@ CREATE TABLE users (
 
 CREATE TABLE categories (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(150) NOT NULL,
+  name VARCHAR(150) NOT NULL
 );
 
 CREATE TABLE products (
