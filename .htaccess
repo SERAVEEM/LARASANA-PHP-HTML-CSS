@@ -1,0 +1,4 @@
+# For Apache: route everything through index.php except real files
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L]
