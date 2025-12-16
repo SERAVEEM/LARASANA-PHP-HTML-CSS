@@ -1,19 +1,15 @@
-Larasana - Pure PHP backend (minimal)
-------------------------------------
-This archive contains a basic pure-PHP backend project including:
-- Authentication (register/login) using PHP sessions
-- Role support (user / admin)
-- Admin-only CRUD for products
-- Simple PDO-based DB connection (MySQL)
-- Example public pages and admin pages
+LARASANA - Native PHP with HTML + CSS
+
 
 How to use
 1. Extract files to your PHP host (document root should point to `public/`).
-2. Update `config/database.php` with your DB credentials.
-3. Import `database/schema.sql` into MySQL.
+2. Update `config/database.php`
+3. Import `database/schema.sql` to MySQL.
 4. Visit `/register.php` and create an account (or insert an admin row in DB).
-5. Login and test pages.
 
 Notes
-- This is a minimal, educational template. Add CSRF protection, input validation,
-  file upload security, and stronger error handling for production.
+- FOR ADMIN 
+1. Run the adminseed.php file and manually insert that in to the DB
+2. Email    : admin@gmail.com
+   Password : admin123
+   

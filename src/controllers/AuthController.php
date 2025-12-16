@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../models/User.php';
 
 class AuthController {
-    public static function register($name, $email, $password) {
+    public static function register($name, $email, $password, $balance = 200) {
         // basic validation left to caller
         return
         //  User::create($name, $email, $password, 'user');
@@ -13,7 +13,7 @@ class AuthController {
             'email' => $email,
             'password' => password_hash($password, PASSWORD_BCRYPT),
             'role' => 'user'
-        ]);
+        ] + ['balance' => (int)$balance]);
     }
 
     public static function login($email, $password) {
