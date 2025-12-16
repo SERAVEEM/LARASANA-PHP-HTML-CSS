@@ -1,0 +1,446 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Dec 16, 2025 at 06:57 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `larasana2`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` varchar(10) NOT NULL,
+  `name` varchar(10) NOT NULL,
+  `email` varchar(25) NOT NULL,
+  `password` varchar(250) NOT NULL,
+  `role` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `name`, `email`, `password`, `role`) VALUES
+('A001', 'admin', 'admin@gmail.com', '$2y$10$7fsq2bRpOUnu7PJUNK070Oe4cdmzugfQBeUZoFEJJMh0DipNys2VW', 'admin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL,
+  `unique_id` varchar(20) DEFAULT NULL,
+  `name` varchar(150) NOT NULL,
+  `slug` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `unique_id`, `name`, `slug`) VALUES
+(1, 'T1', 'Traditional', 'TRD1\r\n'),
+(2, 'M2', 'Modern', 'MD1'),
+(3, 'R3', 'Rustic', 'RT3'),
+(4, 'M1', 'Minimalist', 'MN1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact`
+--
+
+CREATE TABLE `contact` (
+  `Name` varchar(50) NOT NULL,
+  `Phone` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `contact`
+--
+
+INSERT INTO `contact` (`Name`, `Phone`, `email`) VALUES
+('LARASANA', '082133948400', 'larasana@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `city` varchar(100) NOT NULL,
+  `state` varchar(100) NOT NULL,
+  `zip` varchar(20) NOT NULL,
+  `country` varchar(100) NOT NULL,
+  `subtotal` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `shipping` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `tax` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `total` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `status` enum('pending','processing','completed','cancelled') NOT NULL DEFAULT 'pending',
+  `payment_status` enum('pending','paid','failed') DEFAULT 'pending',
+  `payment_method` varchar(50) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `first_name`, `last_name`, `email`, `phone`, `address`, `city`, `state`, `zip`, `country`, `subtotal`, `shipping`, `tax`, `total`, `status`, `payment_status`, `payment_method`, `created_at`, `updated_at`) VALUES
+(1, 'John', 'Doe', 'john.doe@gmail.com', '0821343434', '123 main', 'NEW', 'NY', '10001', 'US', 25.00, 0.00, 0.00, 25.00, 'pending', 'pending', NULL, '2025-12-12 22:24:11', '2025-12-12 22:24:11'),
+(2, 'John', 'Doe', 'john.doe@gmail.com', '0821313122', '123 nsds', 'adasda', 'sana', '12121', 'US', 25.00, 0.00, 0.00, 25.00, 'pending', 'pending', NULL, '2025-12-12 22:28:23', '2025-12-12 22:28:23'),
+(3, 'aku', 'adalah', 'superman@gmail.com', '082131232', '123 sfdad', 'adasdsa', 'adasd', '10001', 'sana', 50.00, 0.00, 0.00, 50.00, 'processing', 'paid', 'paypal', '2025-12-12 22:33:53', '2025-12-12 22:34:03'),
+(4, 'asdasd', 'asdas', 'asdasd@gamil.com', '1231231231', '123 maifna', 'asdad', 'adfasf', '1010101', 'asdf', 20.00, 0.00, 0.00, 20.00, 'processing', 'paid', 'bank-transfer', '2025-12-16 03:44:50', '2025-12-16 03:44:56'),
+(5, 'sdfsdfsdf', 'awfasdf', 'dsfsdaf@gmail.com', '12312313123', '123  in', 'JWC', 'JS', '1232', 'INDO', 10.00, 0.00, 0.00, 10.00, 'processing', 'paid', 'paypal', '2025-12-16 05:10:39', '2025-12-16 05:10:45');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_items`
+--
+
+CREATE TABLE `order_items` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `product_name` varchar(255) NOT NULL,
+  `product_image` varchar(500) DEFAULT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `quantity` int(11) NOT NULL DEFAULT 1,
+  `subtotal` decimal(10,2) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `product_name`, `product_image`, `price`, `quantity`, `subtotal`, `created_at`) VALUES
+(1, 1, 4, 'batik tenun', 'uploads/products/prod_692d3a943753f.jpg', 25.00, 1, 25.00, '2025-12-12 22:24:11'),
+(2, 2, 4, 'batik tenun', 'uploads/products/prod_692d3a943753f.jpg', 25.00, 1, 25.00, '2025-12-12 22:28:23'),
+(3, 3, 3, 'larasana', 'uploads/products/prod_69293d6fe6d10.jpg', 50.00, 1, 50.00, '2025-12-12 22:33:53'),
+(4, 4, 5, 'cardigan', 'uploads/products/prod_69330823196e2.jpg', 10.00, 2, 20.00, '2025-12-16 03:44:50'),
+(5, 5, 5, 'cardigan', 'uploads/products/prod_69330823196e2.jpg', 10.00, 1, 10.00, '2025-12-16 05:10:39');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `partners`
+--
+
+CREATE TABLE `partners` (
+  `ID` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `image_path` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `partners`
+--
+
+INSERT INTO `partners` (`ID`, `name`, `image_path`) VALUES
+(1, 'Wonderful Indonesia', 'C:xampphtdocslarasana-backendpublicassetsimgpartner1.png'),
+(2, 'Happy Heart Indonesia', 'C:xampphtdocslarasana-backendpublicassetsimgpartner2.png'),
+(3, 'YCAB Venture', 'C:xampphtdocslarasana-backendpublicassetsimgpartner3.png'),
+(4, 'UNESCO', 'C:xampphtdocslarasana-backendpublicassetsimgpartner4.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `payment_method` varchar(50) NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `status` enum('pending','completed','failed','refunded') NOT NULL DEFAULT 'pending',
+  `transaction_id` varchar(255) DEFAULT NULL,
+  `transaction_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `notes` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`id`, `order_id`, `payment_method`, `amount`, `status`, `transaction_id`, `transaction_date`, `notes`, `created_at`) VALUES
+(1, 3, 'paypal', 50.00, 'completed', NULL, '2025-12-12 22:34:03', NULL, '2025-12-12 22:34:03'),
+(2, 4, 'bank-transfer', 20.00, 'completed', NULL, '2025-12-16 03:44:56', NULL, '2025-12-16 03:44:56'),
+(3, 5, 'paypal', 10.00, 'completed', NULL, '2025-12-16 05:10:45', NULL, '2025-12-16 05:10:45');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL,
+  `unique_id` varchar(20) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `price` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `description` text DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `unique_id`, `name`, `slug`, `price`, `description`, `category_id`, `image`, `created_at`, `updated_at`) VALUES
+(3, 'PR003', 'larasana', 'B01', 50.00, 'larasana', 1, '/uploads/products/prod_69293d6fe6d10.jpg', '2025-11-28 06:13:03', NULL),
+(4, 'PR004', 'batik tenun', 'BT03', 25.00, 'batik tenun from lombok', 2, '/uploads/products/prod_692d3a943753f.jpg', '2025-12-01 06:49:56', NULL),
+(5, NULL, 'cardigan', 'CD01', 10.00, 'adsa', NULL, '/uploads/products/prod_69330823196e2.jpg', '2025-12-05 16:27:15', '2025-12-05 16:28:19');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `unique_id` varchar(20) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` enum('admin','user') NOT NULL DEFAULT 'user',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `balance` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `unique_id`, `name`, `email`, `password`, `role`, `created_at`, `balance`) VALUES
+(3, 'IS003', 'ucenz', 'ucenz@gmail.com', '$2y$10$FsxAjlEHwsm8B92sm2lPjectLPBSxMo/eZhyBrS5e5kE7AyThEvXq', 'user', '2025-11-27 15:47:47', NULL),
+(4, 'IS004', 'fa', 'fawwazsidiqnurseto@gmail.com', '$2y$10$64t6vR7D9/DnATN6SSP89e2OAWt4V3NM9Ip5BQMTspxNVYHYe70ZS', 'user', '2025-11-27 15:48:48', NULL),
+(11, 'IS011', 'nig', 'nig@gmaill.com', '$2y$10$IxekgSfznzDsSi/zQg6vFuaBXZCN4NxSR5AC0hRFzSlO6Wux6OUqa', 'user', '2025-11-30 07:30:16', NULL),
+(12, 'IS012', 'fafa', 'fafa@gmail.com', '$2y$10$dm4E9LJ8DgCt520IzbwZzemt4Ufx8jpsJibWl93ItnlHlHbz/33nG', 'user', '2025-11-30 07:30:34', NULL),
+(13, 'IS013', 'nat', 'nat@gmail.com', '$2y$10$nAnmz2mvu29nX3rHC/jTF.wvZgzOknTIM9crkfzElJN/lPRtkZkga', 'user', '2025-12-02 11:16:59', NULL),
+(14, 'IS014', 'pak co', 'pakco@gmail.com', '$2y$10$kQJ1zHRbRVF.5mW5MrY9vu7W5CpROvtRsIRPJ6He0Hr6xpNwAuI4a', 'user', '2025-12-04 10:27:46', NULL),
+(15, NULL, 'rafi', 'rafi@gmail.com', '$2y$10$PwXVX6jZAgkbkVuIUoXCg.Rn8tH9q0fPIaz/XcEEfh5Qm7yFIGR8e', 'user', '2025-12-05 16:41:45', NULL),
+(16, NULL, 'anjay', 'anjay123@gmail.com', '$2y$10$eNwR0sPIGYN0Wxs9qBCx9u4MbwGgePp.YBsKZ3wq2z8e7xZxRh4em', 'user', '2025-12-11 19:30:05', NULL),
+(17, NULL, 'raffui', 'raff@gmail.com', '$2y$10$VysgV.VO.EmGsxW5RN.H7.aFgOR5CaRojRLmixMqa7t4GhtqNoY8u', 'user', '2025-12-11 22:03:32', 35),
+(18, NULL, 'fufufafa', 'fufufafa@gmail.com', '$2y$10$bgQPL5Z3T87Bpbj803XC2.1H57tEH4p.RiJXjM5y4BocR45uia/x2', 'user', '2025-12-12 22:11:25', 200),
+(19, NULL, 'test', 'a@gmail.com', '$2y$10$V89DUMK2TPxTBiGajlQEBuD415eggfv3eYYvKRlnSxK4cuTmlzE2G', 'user', '2025-12-12 22:15:11', 200),
+(20, NULL, 'fawwaz', 'fawwaz@gmail.com', '$2y$10$e/hZLx6WOQFwsssxY92O0ueGVT.EnnRuqZvGRl1AhxAc9wdAfECBy', 'user', '2025-12-12 22:17:43', 200),
+(21, NULL, 'tab', 'tablet@gmail.com', '$2y$10$a/JF1yS9NFcL6Q5qlsB6jeYOdgCB5R4hMCrud/bImreEg16S9KWu2', 'user', '2025-12-16 03:24:58', 1000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wishlist`
+--
+
+CREATE TABLE `wishlist` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `slug` (`slug`),
+  ADD UNIQUE KEY `unique_id` (`unique_id`);
+
+--
+-- Indexes for table `contact`
+--
+ALTER TABLE `contact`
+  ADD PRIMARY KEY (`Name`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `email` (`email`),
+  ADD KEY `status` (`status`),
+  ADD KEY `created_at` (`created_at`);
+
+--
+-- Indexes for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `partners`
+--
+ALTER TABLE `partners`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `status` (`status`),
+  ADD KEY `transaction_date` (`transaction_date`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `slug` (`slug`),
+  ADD UNIQUE KEY `unique_id` (`unique_id`),
+  ADD KEY `category_id` (`category_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `unique_id` (`unique_id`);
+
+--
+-- Indexes for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_wishlist` (`user_id`,`product_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `order_items`
+--
+ALTER TABLE `order_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `partners`
+--
+ALTER TABLE `partners`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `payments`
+--
+ALTER TABLE `payments`
+  ADD CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  ADD CONSTRAINT `wishlist_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `wishlist_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
