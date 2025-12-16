@@ -1,0 +1,148 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.bg-pattern {
+    /* background-image: url('../img/pattern-bg.jpg'); */
+    /* background-repeat: no-repeat; */
+    background-size: fill;
+    background-position: center;
+    /* background-color: #000; */
+}
+
+body {
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.card {
+    width: 410px;
+    padding: 40px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+.star {
+    position: absolute;
+    width: 18px;
+    right: 40px;
+    top: 35px;
+    opacity: 0.8;
+}
+
+h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 25px;
+    margin-top: 10px;
+}
+
+.error {
+    background: #ffecec;
+    color: #d05b5b;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.field {
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+.field label {
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 6px;
+}
+
+.field input {
+    border: none;
+    border-bottom: 1px solid #d8d8d8;
+    padding: 10px 5px;
+    outline: none;
+    font-size: 14px;
+    color: #333;
+}
+
+.field input::placeholder {
+    color: #b4b4b4;
+}
+
+/* Button */
+.btn {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #dec084, #caa563);
+    color: #563a18;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    filter: brightness(1.1);
+}
+
+.login {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #a58d71;
+}
+
+.login a {
+    color: #d3aa64;
+    text-decoration: none;
+}
+
+.login a:hover {
+    text-decoration: underline;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    background: #000;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 60px;
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+}
+
+.nav-links a {
+    margin: 0 20px;
+    color: white;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.btn-signup {
+    border: 1px solid #B38A1E;
+    padding: 10px 18px;
+    border-radius: 6px;
+    color: #B38A1E;
+    text-decoration: none;
+}

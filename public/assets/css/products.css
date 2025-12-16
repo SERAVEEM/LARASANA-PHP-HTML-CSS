@@ -1,0 +1,144 @@
+/* ----------------------------------
+   PRODUCT PAGE WRAPPER
+---------------------------------- */
+.product-container {
+    padding: 160px 110px 80px; /* ekstra ruang karena navbar fixed */
+    background: #FAF9F6; /* Off-white luxury */
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+}
+
+/* ----------------------------------
+   PAGE INTRO
+---------------------------------- */
+.page-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.page-title {
+    font-family: 'Lora', serif;
+    font-size: 48px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.page-subtitle {
+    font-size: 16px;
+    margin-top: 10px;
+    color: #555;
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+/* ----------------------------------
+   FILTER MENU
+---------------------------------- */
+.luxury-filter {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 55px;
+}
+
+.luxury-filter button {
+    background: none;
+    border: 1px solid transparent;
+    padding: 8px 24px;
+    font-size: 15px;
+    border-radius: 30px;
+    color: #444;
+    transition: 0.25s ease;
+}
+
+.luxury-filter button:hover {
+    border-color: #C8A44A;
+    color: #C8A44A;
+}
+
+.luxury-filter .active {
+    background: #C8A44A;
+    color: white;
+    border-color: #C8A44A;
+}
+
+/* ----------------------------------
+   PRODUCT GRID (Luxury)
+---------------------------------- */
+.luxury-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+}
+
+/* CARD */
+.luxury-card {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.3s;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+}
+
+.luxury-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+}
+
+/* IMAGE */
+.img-wrap {
+    height: 260px;
+    overflow: hidden;
+    border-bottom: 1px solid #eee;
+}
+
+.product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.4s ease;
+}
+
+.luxury-card:hover .product-img {
+    transform: scale(1.07);
+}
+
+/* CARD BODY */
+.card-body {
+    padding: 18px;
+}
+
+.product-name {
+    font-size: 17px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 4px;
+    font-family: 'Lora', serif;
+}
+
+.price {
+    font-size: 15px;
+    font-weight: 500;
+    color: #987A01;
+    margin-bottom: 12px;
+}
+
+/* BUTTON */
+.btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 8px;
+    background: #987A01;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.btn:hover {
+    background: #BA8F07;
+}
