@@ -5,7 +5,8 @@ How to use
 1. Extract files to your PHP host (document root should point to `public/`).
 2. Update `config/database.php`
 3. Import `database/schema.sql` to MySQL.
-4. Visit `/register.php` and create an account (or insert an admin row in DB).
+4. go to terminal and cd to public (cd public)
+5. go to `/register.php` and create an account (or insert an admin row in DB).
 
 Notes
 - FOR ADMIN 
